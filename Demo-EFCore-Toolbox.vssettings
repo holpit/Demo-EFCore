@@ -1,0 +1,117 @@
+<UserSettings><ApplicationIdentity version="14.0"/><ToolsOptions/><Category name="Environment_Group" RegisteredName="Environment_Group"><Category name="Environment_Toolbox" Category="{481999F2-7479-4e03-83D5-BE808BA142DF}" Package="{DA9FB551-C724-11d0-AE1F-00A0C90FFFC3}" RegisteredName="Environment_Toolbox" PackageName="Visual Studio Environment Package"><PropertyValue name="ShowAllTabs">false</PropertyValue><PropertyValue name="Version">1</PropertyValue><PropertyValue name="DeletedTabCount">0</PropertyValue><PropertyValue name="Tab0.ID">Control Flow</PropertyValue><PropertyValue name="Tab0.Name">Control Flow</PropertyValue><PropertyValue name="Tab0.View">0</PropertyValue><PropertyValue name="Tab0.UseDefaultName">true</PropertyValue><PropertyValue name="Tab0.RecordType">4</PropertyValue><PropertyValue name="Tab0.Position">36</PropertyValue><PropertyValue name="TabCount">1</PropertyValue><PropertyValue name="DeletedItemCount">0</PropertyValue><PropertyValue name="Item0.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item0.ID">0CE5CFA0B5E00F58C086FF64567E201E</PropertyValue><PropertyValue name="Item0.Name">101ConnectionString</PropertyValue><PropertyValue name="Item0.UseDefaultName">false</PropertyValue><PropertyValue name="Item0.Tab">General</PropertyValue><PropertyValue name="Item0.TabID">General</PropertyValue><PropertyValue name="Item0.OriginalTabID">General</PropertyValue><PropertyValue name="Item0.OriginalTab">General</PropertyValue><PropertyValue name="Item0.RecordType">1</PropertyValue><PropertyValue name="Item0.Data">@"Server=(localdb)\mssqllocaldb;Database=Demo.EFCore101;Trusted_Connection=True;"</PropertyValue><PropertyValue name="Item0.Position">1</PropertyValue><PropertyValue name="Item1.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item1.ID">C8262D0F041E0405AA8B13A46F8F657A</PropertyValue><PropertyValue name="Item1.Name">101Query</PropertyValue><PropertyValue name="Item1.UseDefaultName">false</PropertyValue><PropertyValue name="Item1.Tab">General</PropertyValue><PropertyValue name="Item1.TabID">General</PropertyValue><PropertyValue name="Item1.OriginalTabID">General</PropertyValue><PropertyValue name="Item1.OriginalTab">General</PropertyValue><PropertyValue name="Item1.RecordType">1</PropertyValue><PropertyValue name="Item1.Data">var blogs = db.Blogs
+                    .OrderBy(b =&gt; b.Name)
+                    .ToList();
+
+                foreach (var item in blogs)
+                {
+                    Console.WriteLine(item.Name);
+                }</PropertyValue><PropertyValue name="Item1.Position">2</PropertyValue><PropertyValue name="Item2.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item2.ID">1F20722541A477B11D8AB1F305C2624C</PropertyValue><PropertyValue name="Item2.Name">PerfMoreComplicatedQuery</PropertyValue><PropertyValue name="Item2.UseDefaultName">false</PropertyValue><PropertyValue name="Item2.Tab">General</PropertyValue><PropertyValue name="Item2.TabID">General</PropertyValue><PropertyValue name="Item2.OriginalTabID">General</PropertyValue><PropertyValue name="Item2.OriginalTab">General</PropertyValue><PropertyValue name="Item2.RecordType">1</PropertyValue><PropertyValue name="Item2.Data">db.Customers
+                            .Where(c =&gt; !c.AccountNumber.EndsWith("1"))
+                            .OrderBy(c =&gt; c.AccountNumber)
+                            .ThenBy(c =&gt; c.ModifiedDate)
+                            .Skip(100)
+                            .GroupBy(c =&gt; c.TerritoryID)
+                            .ToList();</PropertyValue><PropertyValue name="Item2.Position">3</PropertyValue><PropertyValue name="Item3.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item3.ID">D0A18B43365EA8D6AEB2327BDBBDEA9B</PropertyValue><PropertyValue name="Item3.Name">PerfCreateAndSaveCategories</PropertyValue><PropertyValue name="Item3.UseDefaultName">false</PropertyValue><PropertyValue name="Item3.Tab">General</PropertyValue><PropertyValue name="Item3.TabID">General</PropertyValue><PropertyValue name="Item3.OriginalTabID">General</PropertyValue><PropertyValue name="Item3.OriginalTab">General</PropertyValue><PropertyValue name="Item3.RecordType">1</PropertyValue><PropertyValue name="Item3.Data">for (int i = 0; i &lt; 1000; i++)
+                        {
+                            var category = new EF6.ProductCategory { Name = $"Test {Guid.NewGuid()}" };
+                            db.ProductCategories.Add(category);
+                        }
+                        db.SaveChanges();</PropertyValue><PropertyValue name="Item3.Position">4</PropertyValue><PropertyValue name="Item4.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item4.ID">61A89E9C62B7DEE1979D9B1183D4AB95</PropertyValue><PropertyValue name="Item4.Name">PerfCreateAndSaveCategories (EF6 Optimized)</PropertyValue><PropertyValue name="Item4.UseDefaultName">false</PropertyValue><PropertyValue name="Item4.Tab">General</PropertyValue><PropertyValue name="Item4.TabID">General</PropertyValue><PropertyValue name="Item4.OriginalTabID">General</PropertyValue><PropertyValue name="Item4.OriginalTab">General</PropertyValue><PropertyValue name="Item4.RecordType">1</PropertyValue><PropertyValue name="Item4.Data">db.Configuration.AutoDetectChangesEnabled = false;
+                        var categories = new EF6.ProductCategory[1000];
+                        for (int i = 0; i &lt; 1000; i++)
+                        {
+                            categories[i] = new EF6.ProductCategory { Name = $"Test {Guid.NewGuid()}" };
+                        }
+                        db.ProductCategories.AddRange(categories);
+                        db.SaveChanges();</PropertyValue><PropertyValue name="Item4.Position">5</PropertyValue><PropertyValue name="Item5.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item5.ID">F1F612E9100E59A90FCC96548D91089F</PropertyValue><PropertyValue name="Item5.Name">Conventions</PropertyValue><PropertyValue name="Item5.UseDefaultName">false</PropertyValue><PropertyValue name="Item5.Tab">General</PropertyValue><PropertyValue name="Item5.TabID">General</PropertyValue><PropertyValue name="Item5.OriginalTabID">General</PropertyValue><PropertyValue name="Item5.OriginalTab">General</PropertyValue><PropertyValue name="Item5.RecordType">1</PropertyValue><PropertyValue name="Item5.Data">foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                entity.Relational().TableName = "tbl_" + entity.ClrType.Name;
+
+                foreach (var property in entity.GetProperties().Where(p =&gt; p.ClrType == typeof(string)))
+                {
+                    property.SetMaxLength(200);
+                }
+
+                foreach (var fk in entity.GetForeignKeys())
+                {
+                    fk.Relational().Name = fk.Relational().Name.ToLower();
+                }
+            }</PropertyValue><PropertyValue name="Item5.Position">6</PropertyValue><PropertyValue name="Item6.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item6.ID">5104D003346BD369B83B60EB5C4CBD2A</PropertyValue><PropertyValue name="Item6.Name">PrintTypeToTableMappings (EF Core)</PropertyValue><PropertyValue name="Item6.UseDefaultName">false</PropertyValue><PropertyValue name="Item6.Tab">General</PropertyValue><PropertyValue name="Item6.TabID">General</PropertyValue><PropertyValue name="Item6.OriginalTabID">General</PropertyValue><PropertyValue name="Item6.OriginalTab">General</PropertyValue><PropertyValue name="Item6.RecordType">1</PropertyValue><PropertyValue name="Item6.Data">foreach (var item in db.Model.GetEntityTypes())
+                {
+                    Console.WriteLine($" {item.ClrType.Name} =&gt; {item.SqlServer().TableName}");
+                }</PropertyValue><PropertyValue name="Item6.Position">7</PropertyValue><PropertyValue name="Item7.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item7.ID">27CED9AD58049D88020FA73AA0E65B98</PropertyValue><PropertyValue name="Item7.Name">NoteTakerSQLiteConnectionString</PropertyValue><PropertyValue name="Item7.UseDefaultName">false</PropertyValue><PropertyValue name="Item7.Tab">General</PropertyValue><PropertyValue name="Item7.TabID">General</PropertyValue><PropertyValue name="Item7.OriginalTabID">General</PropertyValue><PropertyValue name="Item7.OriginalTab">General</PropertyValue><PropertyValue name="Item7.RecordType">1</PropertyValue><PropertyValue name="Item7.Data">"Filename=Notes.db"</PropertyValue><PropertyValue name="Item7.Position">8</PropertyValue><PropertyValue name="Item8.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item8.ID">DD586080E37DFDAAF38684C01F105FD1</PropertyValue><PropertyValue name="Item8.Name">NoteTakerSaveToRemoteDatabase</PropertyValue><PropertyValue name="Item8.UseDefaultName">false</PropertyValue><PropertyValue name="Item8.Tab">General</PropertyValue><PropertyValue name="Item8.TabID">General</PropertyValue><PropertyValue name="Item8.OriginalTabID">General</PropertyValue><PropertyValue name="Item8.OriginalTab">General</PropertyValue><PropertyValue name="Item8.RecordType">1</PropertyValue><PropertyValue name="Item8.Data">var builder = new DbContextOptionsBuilder();
+                builder.UseSqlServer(connectionString);
+                var options = builder.Options;
+
+                using (var db = new NoteContext(options))
+                {
+                    db.Database.EnsureCreated();
+                    db.Notes.AddRange(newNotes);
+                    db.SaveChanges();
+                }</PropertyValue><PropertyValue name="Item8.Position">9</PropertyValue><PropertyValue name="Item9.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item9.ID">704BDB075AFEF8114BA5C31F8C49016C</PropertyValue><PropertyValue name="Item9.Name">NoteTakerRemoteEnsureCreated</PropertyValue><PropertyValue name="Item9.UseDefaultName">false</PropertyValue><PropertyValue name="Item9.Tab">General</PropertyValue><PropertyValue name="Item9.TabID">General</PropertyValue><PropertyValue name="Item9.OriginalTabID">General</PropertyValue><PropertyValue name="Item9.OriginalTab">General</PropertyValue><PropertyValue name="Item9.RecordType">1</PropertyValue><PropertyValue name="Item9.Data">var connectionString = ConfigurationManager.ConnectionStrings["RemoteDatabase"].ConnectionString;
+            var builder = new DbContextOptionsBuilder().UseSqlServer(connectionString);
+            var options = builder.Options;
+            using (var db = new NoteContext(options))
+            {
+                db.Database.EnsureCreated();
+            }</PropertyValue><PropertyValue name="Item9.Position">10</PropertyValue><PropertyValue name="Item10.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item10.ID">C67C80722FC36CF865110F0FCD486C2B</PropertyValue><PropertyValue name="Item10.Name">ConsumingServices</PropertyValue><PropertyValue name="Item10.UseDefaultName">false</PropertyValue><PropertyValue name="Item10.Tab">General</PropertyValue><PropertyValue name="Item10.TabID">General</PropertyValue><PropertyValue name="Item10.OriginalTabID">General</PropertyValue><PropertyValue name="Item10.OriginalTab">General</PropertyValue><PropertyValue name="Item10.RecordType">1</PropertyValue><PropertyValue name="Item10.Data">var serviceProvider = db.GetInfrastructure&lt;IServiceProvider&gt;();
+                var typeMapper = serviceProvider.GetService&lt;IRelationalTypeMapper&gt;();
+
+                Console.WriteLine($"Type mapper in use: {typeMapper.GetType().Name}");
+                Console.WriteLine($"Mapping for bool: {typeMapper.GetMapping(typeof(bool)).StoreType}");
+                Console.WriteLine($"Mapping for string: {typeMapper.GetMapping(typeof(string)).StoreType}");</PropertyValue><PropertyValue name="Item10.Position">11</PropertyValue><PropertyValue name="Item11.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item11.ID">B3817D797B59186938A18A7168F0F62E</PropertyValue><PropertyValue name="Item11.Name">ReplacingServicesFindMapping</PropertyValue><PropertyValue name="Item11.UseDefaultName">false</PropertyValue><PropertyValue name="Item11.Tab">General</PropertyValue><PropertyValue name="Item11.TabID">General</PropertyValue><PropertyValue name="Item11.OriginalTabID">General</PropertyValue><PropertyValue name="Item11.OriginalTab">General</PropertyValue><PropertyValue name="Item11.RecordType">1</PropertyValue><PropertyValue name="Item11.Data">if (property.HasClrAttribute&lt;XmlAttribute&gt;())
+            {
+                return _xml;
+            }</PropertyValue><PropertyValue name="Item11.Position">12</PropertyValue><PropertyValue name="Item12.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item12.ID">44C28C852F74DC07907D1F5A7AFFC287</PropertyValue><PropertyValue name="Item12.Name">ReplacingServicesV1.0</PropertyValue><PropertyValue name="Item12.UseDefaultName">false</PropertyValue><PropertyValue name="Item12.Tab">General</PropertyValue><PropertyValue name="Item12.TabID">General</PropertyValue><PropertyValue name="Item12.OriginalTabID">General</PropertyValue><PropertyValue name="Item12.OriginalTab">General</PropertyValue><PropertyValue name="Item12.RecordType">1</PropertyValue><PropertyValue name="Item12.Data">var serviceCollection = new ServiceCollection();
+
+            serviceCollection
+                .AddEntityFrameworkSqlServer();
+
+            serviceCollection.AddSingleton&lt;SqlServerTypeMapper, CustomSqlServerTypeMapper&gt;();
+
+            optionsBuilder.UseInternalServiceProvider(serviceCollection.BuildServiceProvider());</PropertyValue><PropertyValue name="Item12.Position">13</PropertyValue><PropertyValue name="Item13.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item13.ID">726927B5EDE7881CD403536349F6BB7C</PropertyValue><PropertyValue name="Item13.Name">ReplacingServicesV1.1</PropertyValue><PropertyValue name="Item13.UseDefaultName">false</PropertyValue><PropertyValue name="Item13.Tab">General</PropertyValue><PropertyValue name="Item13.TabID">General</PropertyValue><PropertyValue name="Item13.OriginalTabID">General</PropertyValue><PropertyValue name="Item13.OriginalTab">General</PropertyValue><PropertyValue name="Item13.RecordType">1</PropertyValue><PropertyValue name="Item13.Data">optionsBuilder.ReplaceService&lt;IRelationalTypeMapper, CustomSqlServerTypeMapper&gt;();</PropertyValue><PropertyValue name="Item13.Position">14</PropertyValue><PropertyValue name="Item14.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item14.ID">504A4DB303005BF466DC422B16E169EC</PropertyValue><PropertyValue name="Item14.Name">MemoryOptimizedTables</PropertyValue><PropertyValue name="Item14.UseDefaultName">false</PropertyValue><PropertyValue name="Item14.Tab">General</PropertyValue><PropertyValue name="Item14.TabID">General</PropertyValue><PropertyValue name="Item14.OriginalTabID">General</PropertyValue><PropertyValue name="Item14.OriginalTab">General</PropertyValue><PropertyValue name="Item14.RecordType">1</PropertyValue><PropertyValue name="Item14.Data">modelBuilder.Entity&lt;SensorRead&gt;().ForSqlServerIsMemoryOptimized();</PropertyValue><PropertyValue name="Item14.Position">15</PropertyValue><PropertyValue name="Item15.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item15.ID">F45CD72C97641D0FDE502FDCED08CE09</PropertyValue><PropertyValue name="Item15.Name">AdventureWorksAzureConnectionString</PropertyValue><PropertyValue name="Item15.UseDefaultName">false</PropertyValue><PropertyValue name="Item15.Tab">General</PropertyValue><PropertyValue name="Item15.TabID">General</PropertyValue><PropertyValue name="Item15.OriginalTabID">General</PropertyValue><PropertyValue name="Item15.OriginalTab">General</PropertyValue><PropertyValue name="Item15.RecordType">1</PropertyValue><PropertyValue name="Item15.Data">&lt;add name="AdventureWorks" connectionString="data source=demo-efcore.database.windows.net;initial catalog=AdventureWorks2014;User ID=[youusername];Password=[yourpassword];MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;App=EntityFramework" providerName="System.Data.SqlClient" /&gt;</PropertyValue><PropertyValue name="Item15.Position">16</PropertyValue><PropertyValue name="Item16.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item16.ID">64FE388A109338F840B1C7BF121065F5</PropertyValue><PropertyValue name="Item16.Name">FromSqlTVFSearch</PropertyValue><PropertyValue name="Item16.UseDefaultName">false</PropertyValue><PropertyValue name="Item16.Tab">General</PropertyValue><PropertyValue name="Item16.TabID">General</PropertyValue><PropertyValue name="Item16.OriginalTabID">General</PropertyValue><PropertyValue name="Item16.OriginalTab">General</PropertyValue><PropertyValue name="Item16.RecordType">1</PropertyValue><PropertyValue name="Item16.Data">var blogs = db.Blogs
+                    .FromSql("SELECT * FROM dbo.SearchBlogs({0})", term);</PropertyValue><PropertyValue name="Item16.Position">17</PropertyValue><PropertyValue name="Item17.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item17.ID">275D4184DE814DFCA03889E61B2500D8</PropertyValue><PropertyValue name="Item17.Name">MigrationsBloggingModel</PropertyValue><PropertyValue name="Item17.UseDefaultName">false</PropertyValue><PropertyValue name="Item17.Tab">General</PropertyValue><PropertyValue name="Item17.TabID">General</PropertyValue><PropertyValue name="Item17.OriginalTabID">General</PropertyValue><PropertyValue name="Item17.OriginalTab">General</PropertyValue><PropertyValue name="Item17.RecordType">1</PropertyValue><PropertyValue name="Item17.Data">public class BloggingContext : DbContext
+    {
+        public DbSet&lt;Blog&gt; Blogs { get; set; }
+        public DbSet&lt;Post&gt; Posts { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Demo.Migrations;Trusted_Connection=True;");
+        }
+    }
+
+    public class Blog
+    {
+        public int BlogId { get; set; }
+        public string Url { get; set; }
+
+        // TODO: add the name property
+
+        public List&lt;Post&gt; Posts { get; set; }
+    }
+
+    public class Post
+    {
+        public int PostId { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+
+        public int BlogId { get; set; }
+        public Blog Blog { get; set; }
+    }</PropertyValue><PropertyValue name="Item17.Position">18</PropertyValue><PropertyValue name="Item18.DataProvider">{0A057BAD-6706-45D2-A800-683A29EC6BA3}</PropertyValue><PropertyValue name="Item18.ID">E18EB0EE406DC5B7404490C5E68F06B5</PropertyValue><PropertyValue name="Item18.Name">MigrationsCreateAndQueryBlogs</PropertyValue><PropertyValue name="Item18.UseDefaultName">false</PropertyValue><PropertyValue name="Item18.Tab">General</PropertyValue><PropertyValue name="Item18.TabID">General</PropertyValue><PropertyValue name="Item18.OriginalTabID">General</PropertyValue><PropertyValue name="Item18.OriginalTab">General</PropertyValue><PropertyValue name="Item18.RecordType">1</PropertyValue><PropertyValue name="Item18.Data">using (var db = new BloggingContext())
+            {
+                // you can force a migration from code using the Migrate() method
+                //db.Database.Migrate();
+
+                db.Blogs.Add(new Blog { Url = "http://blogs.msdn.com/adonet" });
+                var count = db.SaveChanges();
+                Console.WriteLine("{0} records saved to database", count);
+
+                Console.WriteLine();
+                Console.WriteLine("All blogs in database:");
+                foreach (var blog in db.Blogs)
+                {
+                    Console.WriteLine(" - {0}", blog.Url);
+                }
+            }</PropertyValue><PropertyValue name="Item18.Position">19</PropertyValue><PropertyValue name="ItemCount">19</PropertyValue></Category></Category></UserSettings>

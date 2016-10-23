@@ -31,10 +31,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryOptimizedTables", "Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FieldMapping", "FieldMapping\FieldMapping.csproj", "{1AB3D84A-7798-4BA9-A05E-53EDF457B45B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrations", "Migrations\Migrations.csproj", "{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}"
+EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -260,6 +259,22 @@ Global
 		{1AB3D84A-7798-4BA9-A05E-53EDF457B45B}.Release|x64.Build.0 = Release|Any CPU
 		{1AB3D84A-7798-4BA9-A05E-53EDF457B45B}.Release|x86.ActiveCfg = Release|Any CPU
 		{1AB3D84A-7798-4BA9-A05E-53EDF457B45B}.Release|x86.Build.0 = Release|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Debug|ARM.Build.0 = Debug|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Debug|x64.Build.0 = Debug|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Debug|x86.Build.0 = Debug|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Release|ARM.ActiveCfg = Release|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Release|ARM.Build.0 = Release|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Release|x64.ActiveCfg = Release|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Release|x64.Build.0 = Release|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Release|x86.ActiveCfg = Release|Any CPU
+		{1A3AB1FC-0183-4EF1-865B-76B33ADB9EAE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

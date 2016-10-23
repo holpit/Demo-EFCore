@@ -533,3 +533,101 @@ modelBuilder.Entity<SensorRead>().ForSqlServerIsMemoryOptimized();
 ```
 
 * Run the app for ~30sec and show improved throughput of the database
+
+# Demo: Migrations
+
+* Add the boring blogging model
+
+```
+public class BloggingContext : DbContext
+{
+    public DbSet<Blog> Blogs { get; set; }
+    public DbSet<Post> Posts { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Demo.Migrations;Trusted_Connection=True;");
+    }
+}
+
+public class Blog
+{
+    public int BlogId { get; set; }
+    public string Url { get; set; }
+
+    // TODO: add the name property
+
+    public List<Post> Posts { get; set; }
+}
+
+public class Post
+{
+    public int PostId { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+
+    public int BlogId { get; set; }
+    public Blog Blog { get; set; }
+}
+```
+
+* Create and query some blogs in the `Main` <method></method>
+
+```
+using (var db = new BloggingContext())
+{
+    // you can force a migration from code using the Migrate() method
+    //db.Database.Migrate();
+
+    db.Blogs.Add(new Blog { Url = "http://blogs.msdn.com/adonet" });
+    var count = db.SaveChanges();
+    Console.WriteLine("{0} records saved to database", count);
+
+    Console.WriteLine();
+    Console.WriteLine("All blogs in database:");
+    foreach (var blog in db.Blogs)
+    {
+        Console.WriteLine(" - {0}", blog.Url);
+    }
+}
+```
+
+* Install the EF Core Tools
+
+```
+Install-Package -Id Microsoft.EntityFrameworkCore.Tools –Pre -ProjectName Migrations
+```
+
+* Create the first migration `InitDatabase`
+
+```
+EntityFrameworkCore\Add-Migration InitDatabase -Project Migrations -StartupProject Migrations
+```
+
+* Tell that `EntityFrameworkCore` suffix can be omitted when there's only EF Core installed, but when there's both EF6 and EFCore you should be explicit.
+
+* Create the database with the first migration
+
+```
+EntityFrameworkCore\Update-Database -Project Migrations -StartupProject Migrations
+```
+
+* Add the property `Name` on `Blog` entity class
+
+```
+public string Name { get; set; }
+```
+
+* Create the migration `AddNameOnBlog`
+
+```
+EntityFrameworkCore\Add-Migration AddNameOnBlog -Project Migrations -StartupProject Migrations
+```
+
+* Update the database to add the new column
+
+```
+EntityFrameworkCore\Update-Database -Project Migrations -StartupProject Migrations
+```
+
+* Show that is possible to run a migration from code using the `Database.Migrate()` method
